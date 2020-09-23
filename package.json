@@ -1,8 +1,9 @@
 {
   "name": "svelte-preprocess-autoimport",
   "version": "0.0.1",
-  "main": "dist/index.js",
   "license": "ISC",
+  "main": "dist/index.js",
+  "files": ["dist"],
   "devDependencies": {
     "dedent": "^0.7.0",
     "rollup": "^2.28.1",
