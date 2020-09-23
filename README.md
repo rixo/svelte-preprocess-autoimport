@@ -8,6 +8,8 @@ Also automatically writes `const dispatch = createEventDispatcher()` for you.
 
 The preprocessor puts the import statements in the blank spaces of your source files, so sourcemaps are unaffected.
 
+![autoimport in action](./demo.gif)
+
 ## Example
 
 Write:
