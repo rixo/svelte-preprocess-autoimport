@@ -19,7 +19,7 @@ Write:
   })
 </script>
 
-<button on:click={dispatch('event')} />
+<button on:click={() => dispatch('event')} />
 ```
 
 Get:
