@@ -1,6 +1,6 @@
 {
   "name": "svelte-preprocess-autoimport",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "rixo <rixo@rixo.fr>",
   "license": "ISC",
   "homepage": "https://github.com/rixo/svelte-preprocess-autoimport",
@@ -11,9 +11,16 @@
     "type": "git",
     "url": "https://github.com/rixo/svelte-preprocess-autoimport"
   },
-  "keywords": ["svelte", "preprocessor", "auto", "import"],
+  "keywords": [
+    "svelte",
+    "preprocessor",
+    "auto",
+    "import"
+  ],
   "main": "dist/index.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "dedent": "^0.7.0",
     "rollup": "^2.28.1",
