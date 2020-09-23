@@ -25,7 +25,11 @@ Write:
 Get:
 
 ```svelte
-<script>import { onMount, createEventDispatcher } from 'svelte'; const dispatch = createEventDispatcher();
+<script>
+  import { onMount, createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
+
   onMount(() => {
     // ...
   })
@@ -34,14 +38,10 @@ Get:
 <button on:click={() => dispatch('event')} />
 ```
 
-Properly formatted (but sourcemap breaking) equivalent:
+The transformed code that is actually produced is formatted like this to avoid breaking sourcemaps:
 
 ```svelte
-<script>
-  import { onMount, createEventDispatcher } from 'svelte';
-
-  const dispatch = createEventDispatcher();
-
+<script>import { onMount, createEventDispatcher } from 'svelte'; const dispatch = createEventDispatcher();
   onMount(() => {
     // ...
   })
