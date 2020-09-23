@@ -1,0 +1,21 @@
+{
+  "name": "svelte-preprocess-autoimport",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "license": "ISC",
+  "devDependencies": {
+    "dedent": "^0.7.0",
+    "rollup": "^2.28.1",
+    "svelte": "^3.25.1",
+    "zoar": "^0.0.4",
+    "zorax": "^0.0.10"
+  },
+  "peerDependencies": {
+    "svelte": "^3.25.1"
+  },
+  "scripts": {
+    "dev": "rollup -cw",
+    "build": "rollup -c",
+    "test": "zoar"
+  }
+}
