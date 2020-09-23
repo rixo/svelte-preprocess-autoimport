@@ -62,15 +62,20 @@ In your Svelte config (example is for Rollup, but preprocessors are portable so 
 
 ```js
 import autoimport from 'svelte-preprocess-autoimport'
+import svelte from 'rollup-plugin-svelte-hot'
 
 ...
 
 export default {
-  svelte: {
-    preprocess: [
-      autoimport()
-    ]
-  }
+  ...
+  plugins: [
+    svelte({
+      ...
+      preprocess: [
+        autoimport()
+      ]
+    })
+  ]
 }
 ```
 
