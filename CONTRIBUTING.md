@@ -12,8 +12,10 @@ yarn dev
 ## Run the example
 
 ```bash
+yarn link # while still in project's root
 cd example
 yarn
+yarn link svelte-preprocess-autoimport
 yarn dev
 ```
 
