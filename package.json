@@ -1,6 +1,6 @@
 {
   "name": "svelte-preprocess-autoimport",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "rixo <rixo@rixo.fr>",
   "license": "ISC",
   "homepage": "https://github.com/rixo/svelte-preprocess-autoimport",
