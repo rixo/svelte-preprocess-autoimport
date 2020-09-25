@@ -1,4 +1,6 @@
 <script>
+  import { onMount, onDestroy } from 'svelte'
+
   export let name
 
   onMount(() => {
@@ -21,7 +23,9 @@
   </p>
 </main>
 
-<style>
+<style lang="scss">
+  $color: #ff3e00;
+
   main {
     text-align: center;
     padding: 1em;
@@ -30,7 +34,7 @@
   }
 
   h1 {
-    color: #ff3e00;
+    color: $color;
     text-transform: uppercase;
     font-size: 4em;
     font-weight: 100;

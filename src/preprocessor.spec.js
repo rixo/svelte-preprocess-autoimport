@@ -265,7 +265,7 @@ test('can import multiple time as different aliases', macro, {
   `,
 })
 
-describe('context="module"', () => {
+describe.skip('context="module"', () => {
   test("import { onMount } from 'svelte'", macro, {
     source: `
       <script context="module">
@@ -336,4 +336,22 @@ describe('createEventDispatcher automatization', () => {
       <script>import { createEventDispatcher } from 'svelte'; const __dispatch = createEventDispatcher();</script>
     `,
   })
+})
+
+test('compat with SCSS', macro, {
+  source: `
+    <style lang="scss">
+      $red: red;
+      div { color: $red }
+    </style>
+    <div on:click={onMount} />
+  `,
+  expected: `
+    <style lang="scss">
+      $red: red;
+      div { color: $red }
+    </style>
+    <div on:click={onMount} />
+    <script>import { onMount } from 'svelte';</script>
+  `,
 })

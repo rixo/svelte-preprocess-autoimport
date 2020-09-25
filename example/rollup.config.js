@@ -5,6 +5,7 @@ import livereload from 'rollup-plugin-livereload'
 import { terser } from 'rollup-plugin-terser'
 import hmr from 'rollup-plugin-hot'
 import autoimport from 'svelte-preprocess-autoimport'
+import sveltePreprocess from 'svelte-preprocess'
 
 // Set this to true to pass the --single flag to sirv (this serves your
 // index.html for any unmatched route, which is a requirement for SPA
@@ -47,7 +48,7 @@ export default {
       css: css => {
         css.write('public/build/bundle.css')
       },
-      preprocess: [autoimport()],
+      preprocess: [sveltePreprocess(), autoimport()],
       hot: hot && {
         // Optimistic will try to recover from runtime
         // errors during component init

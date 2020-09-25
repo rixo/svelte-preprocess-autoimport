@@ -58,6 +58,11 @@ const parseConfig = (arg = {}) => {
   }
 };
 
+const trimStyle = code =>
+  code.replace(/<\s*style[^>]*>[\s\S]*?<\/\s*style[^>]*>/g, x =>
+    x.replace(/./g, ' ')
+  );
+
 const createPreprocessor = ({
   aliases,
   createEventDispatcher,
@@ -65,7 +70,11 @@ const createPreprocessor = ({
   markup: async ({ content, filename }) => {
     let code = content;
 
-    const ast = compiler.parse(content);
+    // NOTE don't try to parse <style>
+    // there's nothing for us to be found in there, and it breaks with style
+    // preprocessors
+    // see: https://github.com/rixo/svelte-preprocess-autoimport/issues/2
+    const ast = compiler.parse(trimStyle(content));
 
     const found = new Set();
     const excluded = {};
@@ -132,7 +141,7 @@ const createPreprocessor = ({
     }
 
     if (statements.length > 0) {
-      const target = ast.module || ast.instance;
+      const target = ast.instance;
 
       const line = statements.join('; ') + ';';
 
