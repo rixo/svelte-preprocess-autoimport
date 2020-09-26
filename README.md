@@ -133,6 +133,25 @@ autoimport({
   //
   // NOTE: leading $ prefixes will be transformed to _ in the processed code
   //
-  createEventDispatcher: '$$dispatch',
+  createEventDispatcher: '$$dispatch', // default: 'dispatch'
 })
+```
+
+The [default config](https://github.com/rixo/svelte-preprocess-autoimport/blob/master/src/index.js#L3) is to automatize all imports from `svelte` and `svelte/*`.
+
+You can pass a function to customize the default config:
+
+```js
+// e.g. a more conservative config that only aliases imports from `svelte` and
+// createEventDispatcher automation
+autoimport(defaults => ({
+  ...defaults,
+  aliases: {
+    ...Object.fromEntries(
+      Object.entries(defaults.aliases).filter(
+        ([imp, from]) => from === 'svelte'
+      )
+    ),
+  },
+}))
 ```
