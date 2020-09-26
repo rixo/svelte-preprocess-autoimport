@@ -84,19 +84,16 @@ const createPreprocessor = ({
         switch (node.type) {
           case 'Identifier': {
             const { name } = node
+            if (excluded[name]) break
             if (isDeclaration(node, parent)) {
               excluded[name] = true
               break
             }
-            if (
-              createEventDispatcher === name &&
-              !isDeclaration(node, parent)
-            ) {
+            if (createEventDispatcher && createEventDispatcher === name) {
               dispatches.push(node)
               break
             }
-            if (!aliases[name]) break
-            if (!excluded[name]) found.add(name)
+            if (aliases[name]) found.add(name)
             break
           }
         }
@@ -108,14 +105,16 @@ const createPreprocessor = ({
     const grouped = {}
 
     if (dispatches.length > 0) {
-      grouped['svelte'] = ['createEventDispatcher']
+      grouped['svelte'] = [
+        'createEventDispatcher as ___spài_createEventDispatcher',
+      ]
       const targetName = createEventDispatcher.replace(/^(\$+)/, a =>
         '_'.repeat(a.length)
       )
       for (const { start, end, name } of dispatches) {
         code = code.slice(0, start) + targetName + code.slice(end)
       }
-      statements.push(`const ${targetName} = createEventDispatcher()`)
+      statements.push(`const ${targetName} = ___spài_createEventDispatcher()`)
     }
 
     // aliases

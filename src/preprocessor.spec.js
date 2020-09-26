@@ -318,7 +318,7 @@ describe('createEventDispatcher automatization', () => {
       </script>
     `,
     expected: `
-      <script>import { createEventDispatcher } from 'svelte'; const __dispatch = createEventDispatcher();
+      <script>import { createEventDispatcher as ___spài_createEventDispatcher } from 'svelte'; const __dispatch = ___spài_createEventDispatcher();
         __dispatch('bim', { name: 'rixo' })
       </script>
     `,
@@ -333,7 +333,55 @@ describe('createEventDispatcher automatization', () => {
     `,
     expected: `
       <button on:click={() => __dispatch('bim', { name: 'rixo' })} />
-      <script>import { createEventDispatcher } from 'svelte'; const __dispatch = createEventDispatcher();</script>
+      <script>import { createEventDispatcher as ___spài_createEventDispatcher } from 'svelte'; const __dispatch = ___spài_createEventDispatcher();</script>
+    `,
+  })
+
+  test("doesn't overwrite existing createEventDispatcher", macro, {
+    config: {
+      createEventDispatcher: '$$dispatch',
+    },
+    source: `
+      <script>
+        import { createEventDispatcher } from 'svelte'
+
+        const dispatch = createEventDispatcher()
+
+        $$dispatch('bim', { name: 'rixo' })
+      </script>
+    `,
+    expected: `
+      <script>import { createEventDispatcher as ___spài_createEventDispatcher } from 'svelte'; const __dispatch = ___spài_createEventDispatcher();
+        import { createEventDispatcher } from 'svelte'
+
+        const dispatch = createEventDispatcher()
+
+        __dispatch('bim', { name: 'rixo' })
+      </script>
+    `,
+  })
+
+  test("doesn't overwrite existing dispatch", macro, {
+    config: {
+      createEventDispatcher: 'dispatch',
+    },
+    source: `
+      <script>
+        import { createEventDispatcher } from 'svelte'
+
+        const dispatch = createEventDispatcher()
+
+        dispatch('bim', { name: 'rixo' })
+      </script>
+    `,
+    expected: `
+      <script>
+        import { createEventDispatcher } from 'svelte'
+
+        const dispatch = createEventDispatcher()
+
+        dispatch('bim', { name: 'rixo' })
+      </script>
     `,
   })
 })
