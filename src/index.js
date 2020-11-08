@@ -82,6 +82,8 @@ const createPreprocessor = ({
     walk(ast, {
       enter(node, parent) {
         switch (node.type) {
+          case 'Transition': // #4
+          case 'Animation':
           case 'Identifier': {
             const { name } = node
             if (excluded[name]) break

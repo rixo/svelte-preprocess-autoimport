@@ -403,3 +403,65 @@ test('compat with SCSS', macro, {
     <script>import { onMount } from 'svelte';</script>
   `,
 })
+
+describe('transition', () => {
+  test('in:fade', macro, {
+    source: `
+      <div in:fade />
+    `,
+    expected: `
+      <div in:fade />
+      <script>import { fade } from 'svelte/transition';</script>
+    `,
+  })
+
+  test('out:fly with params', macro, {
+    source: `
+      <div out:fly={{ y: 200, duration: 2000 }} />
+    `,
+    expected: `
+      <div out:fly={{ y: 200, duration: 2000 }} />
+      <script>import { fly } from 'svelte/transition';</script>
+    `,
+  })
+
+  test('transition:blur', macro, {
+    source: `
+      <div transition:blur|local />
+    `,
+    expected: `
+      <div transition:blur|local />
+      <script>import { blur } from 'svelte/transition';</script>
+    `,
+  })
+})
+
+describe('animate', () => {
+  test('simple', macro, {
+    source: `
+      {#each list as item, index (item)}
+        <li animate:flip>{item}</li>
+      {/each}
+    `,
+    expected: `
+      {#each list as item, index (item)}
+        <li animate:flip>{item}</li>
+      {/each}
+      <script>import { flip } from 'svelte/animate';</script>
+    `,
+  })
+
+  test('with params', macro, {
+    source: `
+      {#each list as item, index (item)}
+        <li animate:flip="{{ delay: 500 }}">{item}</li>
+      {/each}
+    `,
+    expected: `
+      {#each list as item, index (item)}
+        <li animate:flip="{{ delay: 500 }}">{item}</li>
+      {/each}
+      <script>import { flip } from 'svelte/animate';</script>
+    `,
+  })
+})

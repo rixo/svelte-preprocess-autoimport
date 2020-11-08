@@ -22,6 +22,8 @@ Write:
 </script>
 
 <button on:click={() => dispatch('event')} />
+
+<div transition:fade />
 ```
 
 Get:
@@ -29,6 +31,7 @@ Get:
 ```svelte
 <script>
   import { onMount, createEventDispatcher } from 'svelte';
+  import { fade } from 'svelte/transition';
 
   const dispatch = createEventDispatcher();
 
@@ -38,12 +41,14 @@ Get:
 </script>
 
 <button on:click={() => dispatch('event')} />
+
+<div transition:fade />
 ```
 
 The transformed code that is actually produced is formatted like this to avoid breaking sourcemaps:
 
 ```svelte
-<script>import { onMount, createEventDispatcher } from 'svelte'; const dispatch = createEventDispatcher();
+<script>import { onMount, createEventDispatcher } from 'svelte'; const dispatch = createEventDispatcher(); import { fade } from 'svelte/transition';
   onMount(() => {
     // ...
   })
